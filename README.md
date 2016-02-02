@@ -14,6 +14,21 @@ The `reproduce_ICCV15_results` command reproduces the P-CNN results reported in 
 
 The provided algorithm takes as input the frames of a video and their corresponding pose joints (from ground truth annotation or from your favorite pose detector). There is a `demo.m` file in the package that you should be able to run.
 
+####Datasets
+Two datasets have been used in our ICCV'15 paper:
+- JHMDB \[6\]: as explained above, the `demo.m` file shows how to use P-CNN with this dataset. The dataset and the ground-truth joint positions can be download [here](http://jhmdb.is.tue.mpg.de).
+- MPII Cooking Activities \[7\]: You can download the [dataset](https://www.mpi-inf.mpg.de/departments/computer-vision-and-multimodal-computing/research/human-activity-recognition/mpii-cooking-activities-dataset/) and the [estimated joint positions](http://www.di.ens.fr/willow/research/p-cnn/download/MPII_Cooking_joint_positions.tar) we computed for our experiments. Note that, in MPII Cooking Activities, we do not use the same parameters as for JHMDB (e.g there is no full body part). Then, you have to modify the following parameters in the `demo.m` file:
+```matlab
+param.lhandposition=11;
+param.rhandposition=6;
+param.upbodypositions=1:13;
+param.lside = 120 ;
+```
+and in `compute_pcnn_features.m`:
+```matlab
+param.partids = [1 2 3 4] ; % don't use full body part
+```
+
 ####Cite
 If you use this package, please cite:
 
@@ -36,6 +51,8 @@ YEAR = {2015},<br>
 \[5\] A. Vedaldi and K. Lenc. MatConvNet - Convolutional Neural Networks for MATLAB. 
 
 \[6\] H. Jhuang, J. Gall, S. Zuffi, C. Schmid, and M. J. Black. Towards understanding action recognition. ICCV 2013.
+
+\[7\] M. Rohrbach, S. Amin, M. Andriluka and B. Schiele. A Database for Fine Grained Activity Detection of Cooking Activities. CVPR 2012.
 
 ####Acknowledgements
 We graciously thank the authors of the previous code releases and video benchmark for making them publicly available.
